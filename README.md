@@ -1,6 +1,9 @@
 # TetrisRust
 A Tetris game implementation using Rust !
 
+![image](https://user-images.githubusercontent.com/2021800/133600418-36736c7d-5663-4471-8e58-490532c6ee94.png)
+
+
 This implementation was inspired by OLC great video: 
 https://www.youtube.com/watch?v=8OK8_tHeCIA
 
