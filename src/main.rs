@@ -56,6 +56,14 @@ fn render(screen_width:usize, screen_height: usize, buffer: &[char]) {
     }   
 }
 
+fn print(pos: usize, text: String,  buffer: &mut[char; SCREEN_WIDTH * SCREEN_HEIGHT]) {
+    let mut offset = 0;
+    for s in text.chars() { 
+        buffer[pos + offset] = s;
+        offset += 1;
+    }
+}
+
 fn sprite(x:usize, y:usize, field: &[char]) -> char {
     let sprite_list = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', '=', '#'];
     let char_index = field[y * FIELD_WIDTH + x] as usize - '0' as usize;
@@ -271,22 +279,11 @@ fn main() -> Result<()> {
             assert!(lines.is_empty());
         }
       
-        // TODO a ridiculous way to write the score on the buffer
-        let score_txt = format!("Score:  {}", score);
-        let score_at = 66;
-        let mut place_holder = 0;
-        for s in score_txt.chars() { 
-            screen[score_at + place_holder] = s;
-            place_holder += 1;
-        }
-        // TODO anyways... 
-        let tetris = "TETRIS!";
-        let tetris_at = 5;
-        place_holder = 0;
-        for s in tetris.chars() {
-            screen[tetris_at + place_holder] = s;
-            place_holder += 1;
-        }
+        // print score on the buffer
+        print(66, format!("Score:  {}", score), &mut screen);
+
+        // print title
+        print(5, "TETRIS!".to_string(), &mut screen);
        
         render(SCREEN_WIDTH, SCREEN_HEIGHT, &screen);
 
